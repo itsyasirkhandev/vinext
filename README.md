@@ -105,7 +105,7 @@ pnpm lint --fix
 │
 ├── rules.md                # Code conventions (MUST READ)
 ├── design-system.md        # UI/design rules (MUST READ)
-├── animations.md           # GSAP animation rules (MUST READ)
+├── animations-guide.md     # GSAP animation rules (MUST READ)
 └── AGENTS.md               # AI agent guidance
 ```
 
@@ -115,7 +115,7 @@ Before contributing, read these files in order:
 
 1. **[`rules.md`](./rules.md)** — Code conventions, naming, folder structure, git commits, forms
 2. **[`design-system.md`](./design-system.md)** — Typography, spacing, colors, components, accessibility
-3. **[`animations.md`](./animations.md)** — GSAP setup, hooks, ScrollTrigger, responsive animations
+3. **[`animations-guide.md`](./animations-guide.md)** — GSAP setup, hooks, ScrollTrigger, responsive animations
 
 ## Adding Components
 
