@@ -33,6 +33,8 @@
 
 ## 1. Folder Structure & Naming
 
+> **TL;DR:** Lowercase plural folders (e.g., `components`), kebab-case for multi-word (e.g., `user-settings`).
+
 - **Lowercase only** — never PascalCase or camelCase folders.
 - **Plural** for collections — `components`, `hooks`, `services`, `utils`, `types`.
 - **Kebab-case** for multi-word — `user-settings`, `order-history`.
@@ -46,6 +48,8 @@
 ---
 
 ## 2. Hybrid Folder Architecture
+
+> **TL;DR:** Feature code lives in `src/features/<name>/`. Shared/global code lives in `src/components/`, `src/hooks/`, `src/lib/`. Start local, promote to global when a 2nd feature needs it.
 
 Combines **feature-based** (domain code) with **type-based** (shared code).
 
@@ -110,6 +114,8 @@ src/
 
 ## 3. Feature Module Rules
 
+> **TL;DR:** Import only from a feature's barrel `index.ts`. Never reach into feature internals. Pages must be thin (no business logic).
+
 ### Feature Anatomy
 
 ```
@@ -168,6 +174,9 @@ export default function DashboardPage() {
 
 ## 4. File Naming
 
+> **TL;DR:** Components/Pages = `PascalCase.tsx`. Hooks/Utils = `camelCase.ts`. Types = `camelCase.types.ts`.
+
+
 | File Type | Convention | Examples |
 |-----------|-----------|----------|
 | Components & Pages | **PascalCase** `.tsx` | `Header.tsx`, `LoginForm.tsx`, `UserProfile.tsx` |
@@ -179,6 +188,8 @@ export default function DashboardPage() {
 ---
 
 ## 5. Component, Variable & Function Naming
+
+> **TL;DR:** Variables/hooks = `camelCase`. Booleans = `is/has/can/should`. Constants = `UPPER_SNAKE_CASE`. Type definitions = `PascalCase`.
 
 ### Components — PascalCase (must match file name)
 
@@ -235,6 +246,8 @@ function GetUserData() { ... }        // ❌ PascalCase = components only
 
 ## 6. Code Documentation
 
+> **TL;DR:** Every new file needs a header comment. Exported functions need JSDoc comments.
+
 ### File Header — Required for Every New File
 
 ```ts
@@ -284,6 +297,8 @@ export function UserCard({ user, isCompact, onEdit }: UserCardProps) { ... }
 
 ## 7. Imports
 
+> **TL;DR:** 4-block order (external, global `@/`, feature barrels, relative). Use `@/` alias. Cross-feature imports via `index.ts` only.
+
 ### Order (4 groups, blank line between each)
 
 ```ts
@@ -311,6 +326,8 @@ import { UserAvatar } from './UserAvatar';
 ---
 
 ## 8. Styling & TypeScript
+
+> **TL;DR:** Use Prettier + ESLint. TypeScript `strict: true`. UI must follow 8pt grid and use CSS variables for colors. No arbitrary Tailwind values.
 
 ### Formatting
 
@@ -361,6 +378,8 @@ import { UserAvatar } from './UserAvatar';
 
 ## 9. Git & Commits
 
+> **TL;DR:** Use conventional commits (`feat:`, `fix:`, `chore:`). Ensure all PR checks pass.
+
 ### Conventional Commits
 
 ```
@@ -401,6 +420,8 @@ chore/upgrade-react-19
 
 ## 10. Environment & Secrets
 
+> **TL;DR:** Never commit `.env` or secrets. Use `NEXT_PUBLIC_` for client vars. Update `.env.example`.
+
 - **Never** commit API keys, tokens, or passwords.
 - `.env.example` (committed, dummy values) → `.env` / `.env.local` (gitignored).
 - `UPPER_SNAKE_CASE` for all env vars.
@@ -410,6 +431,8 @@ chore/upgrade-react-19
 ---
 
 ## 11. Testing
+
+> **TL;DR:** Colocate test files next to source (`Component.test.tsx`). Target 80% coverage. Mock external APIs.
 
 - **Unit tests**: colocated — `LoginForm.test.tsx` next to `LoginForm.tsx`.
 - **Integration**: `tests/integration/**`
@@ -421,24 +444,9 @@ chore/upgrade-react-19
 
 ## 12. Animations
 
-> **All animation logic, GSAP setup, hook patterns, selector naming,
-> ScrollTrigger rules, and motion tokens are in
-> [`animations.md`](./animations.md).** Read it before building any
-> animated UI.
->
-> Key rules enforced:
-> - `gsap` and `useGSAP` imported exclusively from `@/lib/gsapConfig` — never from `"gsap"` directly
-> - `useGSAP` always used instead of `useEffect` for all GSAP code
-> - `{ scope: containerRef }` required on every `useGSAP` call — no exceptions
-> - `anim-` prefix required on all CSS classes used as GSAP targets
-> - Duration, ease, and stagger values from `animationTokens.ts` — never hardcoded
-> - `gsap.matchMedia()` required for any animation that differs across breakpoints
-> - `prefers-reduced-motion` check required in every animation hook
-> - Raw GSAP calls isolated to hooks — components only attach refs
-> - `"use client"` required on every file containing GSAP code
-> - `gsap.set()` + `clearProps: "all"` used to reset state between breakpoints
-> - `ScrollTrigger.refresh()` called after all animations register on dynamic pages
-> - `markers: true` is dev-only — never committed to main
+> **TL;DR:** All animation rules are in `animations-guide.md`. Import gsap from `@/lib/gsapConfig`, use `useGSAP` with `{ scope: containerRef }`, prefix targets with `anim-`.
+
+> **Full reference:** [`animations-guide.md`](./animations-guide.md)
 
 ### Animation Quick Rules
 
@@ -462,15 +470,13 @@ chore/upgrade-react-19
 ❌ DON'T: Put raw GSAP calls inside component JSX (except hover micro-animations)
 ```
 
-> For the complete animation system — setup, folder structure, all patterns,
-> ScrollTrigger, gsap.matchMedia(), gsap.set(), debugging tools, and the
-> full animation review checklist, see [`animations.md`](./animations.md).
+> For the complete animation system — setup, folder structure, all patterns, ScrollTrigger, gsap.matchMedia(), gsap.set(), debugging tools, and the full animation review checklist, see [`animations-guide.md`](./animations-guide.md).
 
 ---
 
 ## 13. Forms
 
-> **All forms MUST use react-hook-form with zod resolvers and shadcn/ui Form components.**
+> **TL;DR:** Use `react-hook-form` with `@hookform/resolvers/zod` and shadcn/ui `Form` components. Form schemas go in `schemas/`.
 > This ensures consistent validation, type safety, and accessible form UI.
 
 ### Required Stack
@@ -489,84 +495,43 @@ pnpm add react-hook-form @hookform/resolvers zod
 pnpm dlx shadcn-ui@latest add form
 ```
 
-### Form Pattern
+### Form Pattern Summary
+
+Forms should look generally like this (abstracted):
 
 ```tsx
 'use client';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 
-// 1. Define Zod schema
-const loginFormSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
+// 1. Zod schema
+const schema = z.object({ email: z.string().email() });
 
-// 2. Infer TypeScript type from schema
-type LoginFormValues = z.infer<typeof loginFormSchema>;
-
-export function LoginForm() {
-  // 3. Initialize form with zodResolver
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+export function MyForm() {
+  // 2. Initialize
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: { email: '' },
   });
 
-  // 4. Handle submission
-  function onSubmit(values: LoginFormValues) {
-    // values is fully typed
-    console.log(values);
-  }
-
+  // 3. Render
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(console.log)} className="space-y-6">
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="you@example.com" {...field} />
-              </FormControl>
-              <FormDescription>
-                Enter your registered email address.
-              </FormDescription>
+              <FormControl><Input {...field} /></FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Sign In</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );
@@ -674,7 +639,8 @@ pnpm dlx shadcn-ui@latest add calendar popover  # For date pickers
 
 ## 14. API Architecture
 
-> **All HTTP calls flow through a single base service (`lib/apiClient.ts`).**
+> **TL;DR:** All HTTP calls route through `lib/apiClient.ts`. No URLs in code—use `constants/endpoints.ts`. Services handle fetching, components catch errors with `handleApiError()`.
+
 > This ensures consistent headers, auth token injection, error handling,
 > and typed responses across the entire application.
 
@@ -725,18 +691,13 @@ apiClient.get('/api/users/profile');
 
 ### Service Pattern
 
-Services are thin functions that combine `apiClient` + `API_ENDPOINTS`:
+Services are thin wrappers around `apiClient`:
 
 ```ts
-// features/auth/services/authService.ts
 import { apiClient } from '@/lib/apiClient';
 import { API_ENDPOINTS } from '@/constants/endpoints';
-import type { ApiResponse } from '@/types/api.types';
-import type { LoginRequest, AuthResponse } from '../types/auth.types';
 
-export async function login(
-  data: LoginRequest,
-): Promise<ApiResponse<AuthResponse>> {
+export async function login(data: LoginRequest) {
   return apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, data);
 }
 ```
@@ -744,21 +705,11 @@ export async function login(
 ### Calling Services in Components
 
 ```tsx
-'use client';
-
-import { login } from '@/features/auth';
-import type { ApiError } from '@/types/api.types';
-
-function LoginForm() {
-  async function handleSubmit(data: LoginFormValues) {
-    try {
-      const response = await login(data);
-      // response.data.user, response.data.tokens
-    } catch (error) {
-      const apiError = error as ApiError;
-      // apiError.message, apiError.statusCode, apiError.errors
-    }
-  }
+try {
+  const result = await login(data);
+} catch (error) {
+  // Use handleApiError to toast/extract ApiError instances
+  handleApiError(error); 
 }
 ```
 
@@ -779,54 +730,21 @@ function LoginForm() {
 
 #### Service Pattern — Throw
 
-Services are thin and do **not** catch errors. Let `apiClient` throw `ApiError`:
-
-```ts
-// features/auth/services/authService.ts
-export async function login(data: LoginRequest): Promise<ApiResponse<AuthResponse>> {
-    return apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, data);
-}
-// ApiError is thrown automatically by apiClient on non-2xx responses
-```
+Services are thin and do **not** catch errors. Let `apiClient` throw `ApiError`.
 
 #### Component Pattern — Catch & Toast
 
 ```tsx
-'use client';
-
-import { login } from '@/features/auth';
 import { handleApiError } from '@/lib/apiErrorHandler';
 import { toast } from 'sonner';
 
-function LoginForm() {
-    async function onSubmit(values: LoginFormValues) {
-        try {
-            const response = await login(values);
-            toast.success('Logged in successfully!');
-            // response.data.user, response.data.tokens
-        } catch (error) {
-            handleApiError(error, 'Login failed. Please try again.');
-        }
-    }
-}
-```
-
-#### Form Validation Errors
-
-```tsx
-import { handleApiError, getValidationErrors } from '@/lib/apiErrorHandler';
-import { isApiError } from '@/types/api.types';
-
-async function onSubmit(values: FormValues) {
-    try {
-        await createUser(values);
-    } catch (error) {
-        const apiError = handleApiError(error);
-        if (apiError?.errors) {
-            const fieldErrors = getValidationErrors(apiError);
-            // Map to react-hook-form: form.setError('email', { message: fieldErrors.email })
-        }
-    }
+// In a component context (e.g. form submission):
+try {
+    await login(values);
+    toast.success('Logged in!');
+} catch (error) {
+    handleApiError(error, 'Login failed');
+    // If validation errors: const fieldErrors = getValidationErrors(apiError);
 }
 ```
 
@@ -855,6 +773,8 @@ async function onSubmit(values: FormValues) {
 ---
 
 ## 15. Routing
+
+> **TL;DR:** Put path strings in `constants/routes.ts`. Use Next.js route groups `(group)/` for domain splits. Each group should have a `loading.tsx` shell.
 
 > **All client-side route paths live in `constants/routes.ts`.**
 > This ensures consistent navigation, avoids typos, and makes refactoring safe.
@@ -960,7 +880,7 @@ ROUTING      → constants/routes.ts for paths, route groups for domains, loadin
 COMMITS      → type(scope): description
 FILE HEADER  → Every new file, ISO date, specific description
 DESIGN       → See design-system.md for full UI rules
-ANIMATIONS   → See animations.md — anim- prefix, useGSAP + scope, tokens only, matchMedia for responsive
+ANIMATIONS   → See animations-guide.md — anim- prefix, useGSAP + scope, tokens only, matchMedia
 ```
 
 ---

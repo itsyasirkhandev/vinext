@@ -6,6 +6,8 @@
 
 ## 1. Setup & Imports
 
+> **TL;DR:** Import gsap and plugins from `@/lib/gsapConfig`. Use `animationTokens.ts` for all timing and easing values.
+
 - **Central Config**: Register plugins only in `src/lib/gsapConfig.ts`.
 - **Import Rule**: ALWAYS import from central config.
   ```ts
@@ -18,6 +20,8 @@
 
 ## 2. File Placement & Naming
 
+> **TL;DR:** Put GSAP logic in custom hooks. Target elements using `anim-` prefix classes, never Tailwind classes.
+
 - **Custom Hooks**: Extract GSAP logic into hooks (e.g., `src/features/hero/hooks/useHeroAnimation.ts`).
 - **CSS Selectors**: Always use the `anim-` prefix (e.g., `anim-hero-title`). **NEVER** target Tailwind classes or use `anim-` for styling.
 - **Naming Conventions**: 
@@ -26,6 +30,8 @@
   - matchMedia: `camelCaseMm` (e.g., `heroMm`)
 
 ## 3. The useGSAP Hook (5 Non-Negotiable Rules)
+
+> **TL;DR:** Always use `useGSAP` with `{ scope: containerRef }` in a Client Component (`"use client"`).
 
 1. **`"use client"`**: Must be at the top of the file.
 2. **`useGSAP` Only**: Never use `useEffect` or `useLayoutEffect` for animations.
@@ -49,6 +55,8 @@ export function useHeroAnimation() {
 
 ## 4. Tween & Performance Rules
 
+> **TL;DR:** Only animate composite properties (`x`, `y`, `scale`, `rotation`, `autoAlpha`). Never animate layout properties like `width`.
+
 - **GPU Only**: Animate `x`, `y`, `scale`, `rotation`, `autoAlpha`.
 - **NEVER Animate Reflow**: `width`, `height`, `top`, `left`, `margin`, `padding` (destroys CLS).
 - **`autoAlpha` > `opacity`**: Always prefer `autoAlpha` for entrances (handles `visibility: hidden`).
@@ -56,6 +64,8 @@ export function useHeroAnimation() {
 - **Timelines**: Use `gsap.timeline({ defaults: { ease: EASE.default, duration: DURATION.normal } })` for sequences.
 
 ## 5. Responsive & Accessibility (`gsap.matchMedia`)
+
+> **TL;DR:** Use `gsap.matchMedia()` for breakpoints. Always define reduced motion rules first to respect user preferences.
 
 - Always use `gsap.matchMedia()` for breakpoints.
 - **Reduced Motion**: Always define `BREAKPOINTS.reduced` **first**.
@@ -80,6 +90,8 @@ useGSAP(() => {
 
 ## 6. Reactive State & Dependencies
 
+> **TL;DR:** If animation depends on React state, set `dependencies: [state]` and `revertOnUpdate: true` in the `useGSAP` config.
+
 - When syncing GSAP to React state (e.g., `isOpen`), add dependencies.
 - **Rule**: ALWAYS pair `dependencies: [...]` with `revertOnUpdate: true`.
 
@@ -90,6 +102,8 @@ useGSAP(() => {
 ```
 
 ## 7. ScrollTrigger & Page Transitions
+
+> **TL;DR:** Refresh ScrollTrigger after async loads. Wait for transitions to complete before navigating.
 
 - **ScrollTrigger**: Call `ScrollTrigger.refresh()` after async content/images load.
 - **Page Transitions**: Use `next-transition-router`. Wrap pages in `.anim-page-wrapper`. Call `next()` in `onComplete` callbacks so navigation doesn't hang.

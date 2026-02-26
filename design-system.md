@@ -36,6 +36,8 @@
 
 ## 2. Typography
 
+> **TL;DR:** Only 4 text sizes and 2 font weights (semibold or regular). No arbitrary sizes like `text-[17px]`.
+
 ### 4 Sizes Only
 
 | Token | Purpose | Example Use |
@@ -65,6 +67,8 @@
 ---
 
 ## 3. Spacing — 8pt Grid
+
+> **TL;DR:** Every padding/margin/gap MUST be divisible by 8 or 4. (e.g., `p-4` is 16px, `gap-6` is 24px).
 
 **Every spacing value MUST be divisible by 8 or 4.**
 
@@ -103,6 +107,8 @@ Divisible by 4:  p-1(4px)  p-3(12px)  p-5(20px)  p-7(28px)  p-9(36px)   p-11(44p
 ---
 
 ## 4. Color — 60/30/10 Rule
+
+> **TL;DR:** 60% neutral, 30% complementary, 10% accent. Never hardcode colors (`bg-red-500`); use CSS variables from `globals.css` in OKLCH format.
 
 ### Distribution
 
@@ -158,6 +164,8 @@ Divisible by 4:  p-1(4px)  p-3(12px)  p-5(20px)  p-7(28px)  p-9(36px)   p-11(44p
 ---
 
 ## 5. Tailwind v4 Setup
+
+> **TL;DR:** Use `@import "tailwindcss"`. Colors use `oklch`. Register tokens via `@theme`.
 
 ### CSS Entry Point (globals.css)
 
@@ -242,6 +250,8 @@ Apply classes in this order within an element:
 ---
 
 ## 6. Component Architecture
+
+> **TL;DR:** Use shadcn/ui components first. Modify them as needed. Use CVA for variant styling.
 
 ### shadcn/ui Structure
 
@@ -332,39 +342,11 @@ const buttonVariants = cva(
 
 ### Form Components
 
-Forms use shadcn/ui Form components built on react-hook-form and Radix UI. See [`rules.md`](./rules.md) § 13 for implementation patterns.
+> **TL;DR:** Full form implementation rules and code patterns are in **`rules.md` § 13**.
 
-**Required shadcn components for forms:**
+Forms must use **shadcn/ui Form** components, built on **react-hook-form** and **Radix UI**.
 
-```bash
-# Add form and input components
-pnpm dlx shadcn-ui@latest add form input select checkbox radio-group textarea switch
-```
-
-**Form Component Structure:**
-
-```tsx
-<Form {...form}>
-  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-    <FormField
-      control={form.control}
-      name="fieldName"
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>Label Text</FormLabel>
-          <FormControl>
-            <Input {...field} />
-          </FormControl>
-          <FormDescription>Helper text for the field.</FormDescription>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  </form>
-</Form>
-```
-
-**Form Spacing Guidelines:**
+**Form Spacing Guidelines (8pt grid):**
 
 | Element | Spacing |
 |---------|---------|
@@ -373,36 +355,13 @@ pnpm dlx shadcn-ui@latest add form input select checkbox radio-group textarea sw
 | Description to error | `space-y-1` (4px) |
 | Form buttons | `pt-4` (16px top padding) |
 
-**Form Input Sizing (follows 8pt grid):**
+**Form Input Sizing:**
 
 | Input Size | Height | Classes |
 |------------|--------|---------|
-| Default | 40px | `h-10` |
-| Small | 32px | `h-8` |
-| Large | 48px | `h-12` |
-
-**Form Validation States:**
-
-```tsx
-// Error styling is handled automatically by FormMessage
-// Custom error styling via FormItem:
-<FormItem className="has-focus-visible:ring-2 has-focus-visible:ring-ring">
-```
-
-**Form Rules:**
-
-```
-✅ DO: Use space-y-6 between form fields
-✅ DO: Use space-y-2 between label and input
-✅ DO: Use FormMessage for all validation errors
-✅ DO: Include FormDescription for complex fields
-✅ DO: Use h-10 (40px) for default input height
-
-❌ DON'T: Use arbitrary spacing in forms
-❌ DON'T: Skip FormLabel — accessibility requires labels
-❌ DON'T: Use placeholder text as labels
-❌ DON'T: Create custom error message components
-```
+| Default | 40px | `h-10 text-[size-3]` |
+| Small | 32px | `h-8 text-[size-4]` |
+| Large | 48px | `h-12 text-[size-3]` |
 
 ---
 
