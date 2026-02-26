@@ -1,24 +1,5 @@
-// For adding custom fonts with other frameworks, see:
-// https://tailwindcss.com/docs/font-family
 import type { Metadata } from "next";
-import { DM_Sans, Lora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-
-const fontSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const fontSerif = Lora({
-  subsets: ["latin"],
-  variable: "--font-serif",
-});
-
-const fontMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-mono",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
