@@ -6,16 +6,26 @@
  */
 
 import Link from "vinext/shims/link";
+import {
+  Zap,
+  Atom,
+  Palette,
+  Puzzle,
+  Clapperboard,
+  ClipboardList,
+  Moon,
+  Cloud,
+} from "lucide-react";
 
 const FEATURES = [
-  { icon: "⚡", title: "Vite + vinext", desc: "Lightning-fast HMR with edge-first routing" },
-  { icon: "⚛️", title: "React 19", desc: "Server & client components, concurrent rendering" },
-  { icon: "🎨", title: "Tailwind v4", desc: "OKLCH colors, @theme tokens, automatic content detection" },
-  { icon: "🧩", title: "shadcn/ui", desc: "45+ accessible Radix-based components pre-installed" },
-  { icon: "🎬", title: "GSAP", desc: "Animation infrastructure with useGSAP, ScrollTrigger & tokens" },
-  { icon: "📋", title: "Forms", desc: "react-hook-form + Zod validation + shadcn Form components" },
-  { icon: "🌙", title: "Dark Mode", desc: "CSS variable theming with next-themes provider" },
-  { icon: "☁️", title: "Edge Deploy", desc: "One-command deploy to Cloudflare Workers" },
+  { icon: Zap, title: "Vite + vinext", desc: "Lightning-fast HMR with edge-first routing" },
+  { icon: Atom, title: "React 19", desc: "Server & client components, concurrent rendering" },
+  { icon: Palette, title: "Tailwind v4", desc: "OKLCH colors, @theme tokens, automatic content detection" },
+  { icon: Puzzle, title: "shadcn/ui", desc: "45+ accessible Radix-based components pre-installed" },
+  { icon: Clapperboard, title: "GSAP", desc: "Animation infrastructure with useGSAP, ScrollTrigger & tokens" },
+  { icon: ClipboardList, title: "Forms", desc: "react-hook-form + Zod validation + shadcn Form components" },
+  { icon: Moon, title: "Dark Mode", desc: "CSS variable theming with next-themes provider" },
+  { icon: Cloud, title: "Edge Deploy", desc: "One-command deploy to Cloudflare Workers" },
 ] as const;
 
 const DOCS = [
@@ -41,12 +51,12 @@ export default function Home() {
 
         {/* Feature Grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {FEATURES.map(({ icon, title, desc }) => (
+          {FEATURES.map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
               className="flex gap-3 rounded-lg border border-border bg-card p-4"
             >
-              <span className="text-xl">{icon}</span>
+              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-semibold text-foreground">
                   {title}
