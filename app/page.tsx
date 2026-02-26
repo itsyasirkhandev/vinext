@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "vinext/shims/image";
 
 export default function Home() {
   return (
