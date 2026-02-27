@@ -39,63 +39,112 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-16">
       <main className="flex w-full max-w-2xl flex-col gap-12">
         {/* Header */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-            vinext
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Production-ready frontend template — React 19, Tailwind v4,
-            shadcn/ui, GSAP, and Cloudflare Workers.
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground">
+              vinext
+            </h1>
+            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary ring-1 ring-inset ring-primary/20">
+              Next.js Over Vite
+            </span>
+          </div>
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            The Next.js API surface, reimplemented on Vite by Cloudflare.
+            Built for maximum performance and instant deployment to Cloudflare Workers.
           </p>
         </div>
+
+        {/* What is vinext? */}
+        <section className="rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+            Why vinext?
+          </h2>
+          <div className="grid gap-4 text-sm leading-relaxed text-muted-foreground">
+            <p>
+              <strong className="text-foreground">vinext</strong> is a drop-in
+              alternative to Next.js developed by Cloudflare engineers to solve
+              the "deployment problem." It provides the same App Router
+              experience you love, but runs on <strong className="text-foreground">Vite</strong> instead of Webpack/Turbopack.
+            </p>
+            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <li className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                4.4x Faster Builds
+              </li>
+              <li className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                57% Smaller Bundles
+              </li>
+              <li className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                94% API Coverage
+              </li>
+              <li className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                Native Edge Support
+              </li>
+            </ul>
+          </div>
+        </section>
 
         {/* Feature Grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
-              className="flex gap-3 rounded-lg border border-border bg-card p-4"
+              className="group flex gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-accent/5"
             >
-              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <Icon className="h-5 w-5" />
+              </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-semibold text-foreground">
+                <span className="text-sm font-bold text-foreground">
                   {title}
                 </span>
-                <span className="text-sm text-muted-foreground">{desc}</span>
+                <span className="text-xs leading-normal text-muted-foreground">
+                  {desc}
+                </span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Docs */}
-        <div className="flex flex-col gap-3">
-          <h2 className="text-base font-semibold text-foreground">
-            Documentation
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {DOCS.map(({ label, file }) => (
-              <Link
-                key={file}
-                href={`/${file}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-8 items-center rounded-md border border-input bg-background px-3 text-sm font-semibold text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                {label}
-              </Link>
-            ))}
+        {/* Docs & CTA */}
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-sm font-semibold text-foreground">
+              Documentation
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {DOCS.map(({ label, file }) => (
+                <Link
+                  key={file}
+                  href={`/${file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 items-center rounded-lg border border-input bg-background px-4 text-sm font-medium text-foreground transition-all hover:bg-accent hover:text-accent-foreground sm:h-10"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between rounded-xl border border-primary/20 bg-primary/5 p-4">
+            <div className="flex flex-col gap-0.5">
+              <p className="text-sm font-bold text-foreground italic">Ready to blast off?</p>
+              <p className="font-mono text-[11px] text-muted-foreground uppercase tracking-widest leading-none">
+                Deploy with `npx vinext deploy`
+              </p>
+            </div>
+            <div className="h-2 w-2 animate-pulse rounded-full bg-primary" />
           </div>
         </div>
 
-        {/* Get Started */}
-        <div className="flex flex-col gap-2 rounded-lg border border-border bg-card p-4">
-          <p className="text-sm font-semibold text-foreground">Get started</p>
-          <p className="font-mono text-sm text-muted-foreground">
-            Edit{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-foreground">
-              app/page.tsx
-            </code>{" "}
-            to start building.
+        {/* Get Started Footer */}
+        <div className="mt-4 border-t border-border pt-8 text-center">
+          <p className="text-xs text-muted-foreground">
+            Modify <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground">app/page.tsx</code> to begin your journey.
           </p>
         </div>
       </main>

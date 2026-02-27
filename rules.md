@@ -65,50 +65,44 @@ Combines **feature-based** (domain code) with **type-based** (shared code).
 
 ```
 src/
-├── app/                        # Next.js App Router (pages, layouts, API routes)
-│   ├── (auth)/                 # Route groups
+├── app/                        # vinext App Router (Next.js 16 reimplementation)
+│   ├── (auth)/                 # Route groups (shared layouts)
 │   │   ├── login/page.tsx
 │   │   └── register/page.tsx
 │   ├── dashboard/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
-│   ├── api/                    # API route handlers
+│   ├── api/                    # API route handlers (Edge-first)
 │   ├── layout.tsx              # Root layout
 │   └── providers.tsx           # Client providers wrapper
 │
-├── features/                   # Domain-specific, self-contained modules
+├── features/                   # Domain-specific modules (Barrel index.ts required)
 │   ├── auth/
 │   │   ├── components/
 │   │   ├── hooks/
 │   │   ├── services/
 │   │   ├── types/
-│   │   └── index.ts            # Public barrel export
+│   │   └── index.ts            # Public API only
 │   ├── dashboard/
 │   ├── products/
 │   └── cart/
 │
-├── components/                 # Shared UI (used by 2+ features)
-│   ├── ui/                     # Primitives: Button, Input, Modal
-│   ├── layout/                 # Header, Footer, Sidebar
-│   └── forms/                  # FormField, FormError
-│
-├── hooks/                      # Shared hooks (used by 2+ features)
-├── lib/                        # Infra: apiClient, queryClient, cn, validators
-├── services/                   # Shared API services (used by 2+ features)
-├── stores/                     # Global state (Zustand/Redux/Jotai)
-├── providers/                  # Context providers: Auth, Theme, Query
-├── types/                      # Shared TypeScript types
-├── constants/                  # Routes, query keys, app config
-├── styles/                     # globals.css, tailwind.css
-├── test/                       # Mocks, fixtures, test setup
-│   ├── mocks/
-│   ├── fixtures/
-│   └── renderWithProviders.tsx
-└── proxy.ts                    # Next.js proxy (replaces middleware)
+├── components/                 # Shared UI (Button, Input, etc.)
+├── hooks/                      # Shared hooks
+├── lib/                        # Infra (apiClient, gsapConfig)
+├── services/                   # Shared services
+├── stores/                     # Global state
+├── providers/                  # Context providers
+├── types/                      # Shared TS types
+├── constants/                  # Routes, Endpoints
+├── styles/                     # globals.css (Tailwind v4)
+├── test/                       # Vitest setup/mocks
+└── proxy.ts                    # Edge-native proxy (replaces middleware.ts)
 ```
 
-> **Plain React (Vite/CRA)**: Replace `src/app/` with `src/pages/` or
-> `src/routes/`. Use `src/App.tsx` as root. Everything else stays the same.
+> **vinext Core**: This project uses **vinext**, a Vite-based reimplementation of
+> Next.js. It supports ~94% of the Next.js API surface and is optimized for
+> **Cloudflare Workers**. Always use `npx vinext` for development and deployment.
 
 ---
 
@@ -792,10 +786,14 @@ import Link from 'vinext/shims/link';
 
 <Link href={ROUTES.DASHBOARD.ROOT}>Dashboard</Link>
 
-// ❌ Bad — hardcoded URL or next/link
-import Link from 'next/link';
+// ❌ Bad — hardcoded URL or using 'next/link'
+import Link from 'next/link'; // WRONG - causes Vite/TS resolution issues
 <Link href="/dashboard">Dashboard</Link>
 ```
+
+> **Why vinext/shims/link?**: In this Vite-based environment, `next/link` 
+> type resolution is unreliable. **Always** use the `vinext/shims/link` 
+> for seamless Cloudflare Workers support.
 
 ### Feature-Based Route Groups
 

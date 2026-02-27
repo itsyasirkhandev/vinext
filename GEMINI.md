@@ -7,11 +7,11 @@
 
 ## Project Snapshot
 
-- **Type**: Single Next.js 16 frontend application (not a monorepo)
-- **Tech**: Next.js 16 App Router, React 19, TypeScript 5, Tailwind v4, shadcn/ui, GSAP
+- **Type**: Single **vinext** App Router application (Next.js 16 reimplementation on Vite)
+- **Origin**: Developed by **Cloudflare** for seamless **Cloudflare Workers** deployment
+- **Tech**: Next.js 16 API surface, React 19, TypeScript 5, Tailwind v4, shadcn/ui, GSAP
 - **Package Manager**: pnpm
-- **Testing**: Vitest + @testing-library/react + jsdom
-- **Formatting**: Prettier (`.prettierrc`) + ESLint
+- **Performance**: 4.4x faster builds, 57% smaller bundles (vs standard Next.js)
 - **Structure**: Single app — feature modules live in `features/`.
 
 ---

@@ -1,7 +1,8 @@
-# app/gemini.md — Next.js App Router
+# app/gemini.md — vinext App Router
 
-> **Package Identity**: Next.js 16 frontend application using App Router.
-> Contains pages, layouts, API routes, and global styles.
+> **Package Identity**: **vinext** App Router application (Next.js 16 reimplementation on Vite).
+> Optimized for **Cloudflare Workers** with 4x faster builds and 57% smaller bundles.
+> Developed by Cloudflare to provide a seamless edge-native Next.js experience.
 
 ---
 
@@ -80,12 +81,13 @@ Extract all business logic, data fetching, and complex state into `src/features/
 
 ## vinext / Next.js Gotchas
 
+- **Origins**: vinext is a clean-room rebuild of the Next.js API surface by Cloudflare. It is NOT a wrapper; it is a full reimplementation on Vite.
 - **Routing Link Shim**: We use `vinext` instead of pure Next.js for Cloudflare edge deployment support. Due to TS type resolution with Vite, you **MUST** import the Next link component via `import Link from 'vinext/shims/link'` instead of `next/link`.
-- **Proxy vs Middleware**: We use `proxy.ts`, NOT `middleware.ts`. The exported function is `proxy()`.
+- **Proxy vs Middleware**: We use `proxy.ts`, NOT `middleware.ts`. The exported function is `proxy()`. This is better suited for the Cloudflare Workers execution model.
 - **vinext CLI**: For compatibility checking, use `npx vinext check`. Standard commands are `vinext dev`, `vinext build`, `vinext start`, and `vinext deploy` (Cloudflare).
 - **RSC Default**: Components are Server Components by default. Only add `"use client"` when you need hooks (`useGSAP`, `useState`) or browser APIs.
 - **Client boundaries deep in tree**: When adding animations (which require "use client"), extract the animated code into a leaf component rather than making the whole page "use client".
 
 ---
 
-*Last updated: 2026-02-26*
+*Last updated: 2026-02-27*
