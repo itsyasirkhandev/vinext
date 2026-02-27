@@ -69,8 +69,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       vinext:
-        specifier: ^0.0.9
-        version: 0.0.9(next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0))(webpack@5.105.2)
+        specifier: ^0.0.13
+        version: 0.0.13(next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0))(webpack@5.105.2)
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -4078,8 +4078,8 @@ packages:
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
 
-  vinext@0.0.9:
-    resolution: {integrity: sha512-21SLIbUN6y8jXo1OPt1SA8auhNe61dt9pFJABFUxDW/RlrDGBNaJk6IahUirK3pGIy9iF1UAZKYqFso0Ch3PLg==}
+  vinext@0.0.13:
+    resolution: {integrity: sha512-UwUCMpGlRDGttAcI1hCa86iMGqAHO23rpPFH0g0/b0Ia5WTPq0z28C68KXXm/rCrol5aPw/QKnWY3JYnslW2eQ==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -8260,7 +8260,7 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  vinext@0.0.9(next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0))(webpack@5.105.2):
+  vinext@0.0.13(next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0))(webpack@5.105.2):
     dependencies:
       '@unpic/react': 1.0.2(next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@vercel/og': 0.8.6
